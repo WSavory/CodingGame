@@ -1,5 +1,4 @@
 #https://www.codingame.com/ide/puzzle/power-of-thor-episode-1
-
 import sys
 import math
 
@@ -20,44 +19,34 @@ light_x, light_y, initial_tx, initial_ty = [int(i) for i in input().split()]
 #E = light_x - initial_tx # positive -> go east, negative -> go west
 #N = light_y - initial_ty # positive -> go north, negative -> go south
 
-
 while True:
     remaining_turns = int(input())  # The remaining amount of turns Thor can move. Do not remove this line.
 
     E = light_x - initial_tx # positive -> go east, negative -> go west
     N = light_y - initial_ty
+    out = ''
 
-    if N < 0 and E == 0:
-        print('N')
-        initial_ty += 1
-    elif N > 0 and E == 0:
-        print('S')
+#    print((light_x, light_y, initial_tx, initial_ty, E, N), file=sys.stderr) for debugging
+
+
+    if N < 0:
+        out += 'N'
         initial_ty -= 1
-    elif E > 0 and N == 0:
-        print('E')
+    elif N > 0:
+        out += 'S'
+        initial_ty += 1
+
+    if E > 0:
+        out += 'E'
         initial_tx += 1
-    elif E < 0 and N == 0:
-        print('W') #N : 17-17 , E0 -18
+    elif E < 0:
+        out += 'W'
         initial_tx -= 1
-    elif N < 0 and E < 0:#N : 17-4 and E : 0-15
-        print('NW')
-        initial_ty += 1
-        initial_tx -= 1
-    elif N > 0 and E > 0:
-        print('SE')
-        initial_ty += 1
-        initial_tx += 1
-    elif N < 0 and E > 0:
-        print('NE')
-        initial_ty += 1
-        initial_tx += 1
-    elif N > 0 and E < 0: # N 17-0 >0 , 0 -31
-        print('SW')
-        initial_ty += 1
-        initial_tx -= 1
-    else: pass
 
 
+    print(out)
+
+# To debug: print("Debug messages...", file=sys.stderr)
 
 # A single line providing the move to be made: N NE E SE S SW W or NW
 

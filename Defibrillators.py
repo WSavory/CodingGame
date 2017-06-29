@@ -1,5 +1,45 @@
 #https://www.codingame.com/ide/puzzle/defibrillators
+import sys
+import math
 
+# Auto-generated code below aims at helping you parse
+# the standard input according to the problem statement.
+loclist = []
+distancelist = []
+
+def replacer(lst): # , to . change and split
+    replace = lst.replace(",",".")
+    if ';' in replace:
+        replace = replace.split(';')
+    return replace
+
+def converter(a): # to convert str to float
+    conv = math.radians(float(a))
+    return conv
+
+lon = converter(replacer(input()))#3.87 = user longitude
+lat = converter(replacer(input()))#43.60 = user latitude
+
+n = int(input())# number of defibrillators
+
+def distance(lonpos,latpos): # calculate distance
+    x = (converter(lonpos) - lon) * math.acos((converter(lonpos) + lat)/2)
+    y = (converter(latpos) - lat)
+    dis = (math.sqrt(x**2 + y**2)) * 6371
+    return dis
+
+for i in range(n): #input and put to location list
+    loclist.append(replacer(input()))
+
+for i in range(n):
+    res = distance(loclist[i][4],loclist[i][5])
+    distancelist.append(res)
+    res = loclist[distancelist.index(min(distancelist))][1] #list.index(min(list))
+
+print(res)
+
+
+'''
 import sys
 import math
 
@@ -52,3 +92,4 @@ number = resdissort.index(distancecal[0])
 final = namelist[number]
 #print (distancecal[36],distancecal[73])
 print(final)
+'''

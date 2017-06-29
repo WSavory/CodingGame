@@ -3,6 +3,37 @@
 import sys
 import math
 
+alist = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ?' # 리스트가 아니라도 원하는 숫자를 꺼내 쓸 수 있음
+
+width = int(input()) # L
+height = int(input()) # H
+txt = input() # N = len(txt), ex) E / MANHATTAN
+
+for _ypos in range(height): # _pos를 타지 않음. 쓰지 않으니까 _를 앞에 붙임. _단독으로는 바로 전함수를 호출할 수 있어서 잘 쓰지 않음
+    charset_oneline = input()#전체를 한줄에 받음
+
+    line_output = ''
+
+    for char in txt:
+        char = char.upper()
+
+        idx = alist.find(char)
+        if idx == -1: #find에서 없으면 -1을 리턴함
+            idx = alist.find('?')
+
+        xpos = idx * width #알파벳 순서 * 넓이
+        line_output += charset_oneline[ xpos : xpos+width ] #알파벳 넓이 시작부터 (:) 넓이만큼
+
+    print(line_output)
+
+
+
+func3(func2(func()))
+
+'''
+import sys
+import math
+
 list1 = []
 list2 = []
 list3 = []
@@ -10,19 +41,19 @@ list4 = []
 list5 = []
 list10 = []
 lindex = []
-alist = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','?','!']
+alist = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ?'
 
 l = int(input()) #4
 h = int(input()) #5
 t = input()#MANHATTAN
-uppert1 = t.upper()
-uppert2 = uppert1.replace("@","?")
-tlist = list(uppert2)
+uppert_letter = t.upper()
+replaced_uppert = uppert_letter.replace("@","?")
+textlist = list(replaced_uppert) #alphabets order
 #print(tlist)
-number = len(tlist)
+number = len(textlist)
 
 for i in range(0,number):
-    lindex.append(alist.index(tlist[i]))
+    lindex.append(alist.index(textlist[i]))
 
 #print(lindex)
 
@@ -73,3 +104,6 @@ print('')
 
 for i in range(0,number):
     print(list5[lindex[i]], end='',flush=True)
+
+
+'''
